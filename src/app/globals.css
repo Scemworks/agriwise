@@ -1,26 +1,135 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Background & text */
+  --background: #f7faf2; /* very light off-white with green tint */
+  --foreground: #0b2b16; /* deep forest green for max contrast */
+  --muted-foreground: #2f4a3e; /* darker muted for better contrast */
+  --surface: #ffffff;
+  --surface-foreground: #0b2b16;
+
+  /* Brand - natural agriculture palette */
+  --brand-700: #14532d; /* dark forest */
+  --brand-600: #176f2a; /* primary green */
+  --brand-500: #22c55e; /* bright green */
+  --brand-400: #66d19a; /* light green */
+  --brand-50:  #ecfbef;
+  --brand-foreground: #ffffff;
+
+  /* Secondary / earthy */
+  --earth-600: #7b4f14; /* deep brown */
+  --earth-400: #b0783a; /* warm brown */
+  --sun-500:   #d97706; /* warm yellow / accent */
+
+  /* Semantic */
+  --accent-500: var(--sun-500);
+  --accent-foreground: #ffffff;
+  --destructive-500: #dc2626;
+  --destructive-foreground: #ffffff;
+
+  --border: #e6efe7; /* soft border */
+  --input: #f5f8f4;
+  --ring: var(--brand-600);
+  --card: var(--surface);
+  --card-foreground: var(--surface-foreground);
 }
 
-@theme inline {
+/* CSS Custom Properties for Tailwind */
+:root {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-brand: var(--brand-600);
+  --color-brand-foreground: var(--brand-foreground);
+  --color-earth: var(--earth-600);
+  --color-accent: var(--accent-500);
+  --color-muted: var(--muted-foreground);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #071024;
+    --foreground: #e6eef0;
+    --muted-foreground: #94a3b8;
+    --surface: #0f172a;
+    --surface-foreground: #e6eef0;
+    --brand-700: #06361a;
+    --brand-600: #0f5b2a;
+    --brand-50:  #062714;
+
+    --accent-500: #f59e0b;
+
+    --border: #0b1620;
+    --input: #07121a;
+    --ring: var(--brand-600);
+    --card: var(--surface);
+    --card-foreground: var(--surface-foreground);
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+/* Accessible focus outlines */
+:focus {
+  outline: none;
+}
+
+/* Make focus visible for keyboard users */
+.focus-ring:focus,
+.focus-ring:focus-visible,
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  box-shadow: 0 0 0 4px rgba(34,197,94,0.12), 0 0 0 1px var(--ring);
+  border-radius: 6px;
+}
+
+/* semantic utility helpers for plain CSS consumers */
+.text-foreground { color: var(--foreground); }
+.text-muted { color: var(--muted-foreground); }
+.bg-surface { background-color: var(--surface); }
+.text-surface-foreground { color: var(--surface-foreground); }
+.bg-brand { background-color: var(--brand-600); }
+.text-brand-foreground { color: var(--brand-foreground); }
+.btn-primary { background-color: var(--brand-600); color: var(--brand-foreground); }
+.btn-primary:hover { background-color: var(--brand-700); }
+.btn-outline { border: 1px solid var(--border); background: transparent; }
+.link-strong { color: var(--brand-600); }
+.link-strong:hover { color: var(--brand-700); }
+
+/* utility classes for semantic colors */
+.bg-earth { background-color: var(--earth-600); color: #fff; }
+.text-earth { color: var(--earth-600); }
+.bg-sun { background-color: var(--sun-500); color: #fff; }
+.text-sun { color: var(--sun-500); }
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-muted);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-brand);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent);
 }
