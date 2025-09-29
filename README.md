@@ -191,6 +191,7 @@ The application includes comprehensive demo data for presentation:
 - **Advanced Analytics** - Farm performance insights
 
 ### 🤝 **Team**
+- **Team Name**: CARBONIX GEC
 - **Frontend Development**: Next.js, TypeScript, Tailwind CSS
 - **UI/UX Design**: Mobile-first, accessibility-focused
 - **Backend Integration**: API-ready architecture
@@ -211,18 +212,56 @@ This project is developed for Smart India Hackathon 2025.
 
 *Empowering farmers with technology for a sustainable future*
 
-## Local demo auth API
+## Local demo auth API & application workflow
 
-This project includes simple demo auth routes using JWT for local testing. They live under `src/app/api/auth` and are intentionally minimal. Replace the in-memory user store in `src/lib/auth.ts` with a real database for production.
+The repository contains both a local/demo and a production-ready setup. Below is a concise workflow and the main files/endpoints to help you navigate the codebase and run the app locally.
 
-Endpoints:
-- POST /api/auth/register { email, password, name? } -> { user, token }
-- POST /api/auth/login { email, password } -> { user, token }
-- POST /api/auth/verify { token } -> { valid: true, user }
+1) Start the app (development)
+	- Install deps: `pnpm install`
+	- Run dev server: `pnpm dev`
+
+2) Authentication (demo & production)
+	- Demo auth routes (JWT-based) live under `src/app/api/auth` and call helpers in `src/lib/auth.ts`.
+	- Endpoints (examples):
+	  - POST `/api/auth/register` { email, password, name? } -> { user, token }
+	  - POST `/api/auth/login` { email, password } -> { user, token }
+	  - POST `/api/auth/refresh` -> rotates refresh token cookie
+	- Production: Prisma + Postgres helpers in `src/lib/auth.ts`, DB client in `src/lib/db.ts`. Tokens are stored in HttpOnly cookies using `src/lib/cookies.ts`.
+
+3) Primary API surface
+	- Weather (India + Global) proxies: `src/app/api/weather/*`
+	  - GET `/api/weather/india?city=Chennai`
+	  - GET `/api/weather/india/cities`
+	  - GET `/api/weather/global/current?location=London`
+	- AI: `src/app/api/ai/crop-recommendation/route.ts` (uses `src/lib/ai/crop-recommendation.ts`)
+	- Marketplace: `src/app/api/marketplace/*`
+	- Dashboard / Protected routes: `src/app/api/dashboard/route.ts`, `src/app/api/protected/route.ts`
+
+4) Frontend pages
+	- Main app pages live in the App Router under `src/app/`:
+	  - `/` -> `src/app/page.tsx`
+	  - `/dashboard` -> `src/app/dashboard/page.tsx`
+	  - `/weather` -> `src/app/weather/page.tsx`
+	  - `/recommendations` -> `src/app/recommendations/page.tsx`
+	  - `/marketplace` -> `src/app/marketplace/page.tsx`
+	  - `/chat` -> `src/app/chat/page.tsx`
+	  - `/carbon-credits` -> `src/app/carbon-credits/page.tsx`
+
+5) Internationalization
+	- Translation strings are under `src/lib/translations.ts` (English, Hindi, Malayalam).
+	- Language provider and hook: `src/contexts/LanguageContext.tsx`.
+
+6) Demo data & testing utilities
+	- Demo UI data: `src/lib/demoData.ts`
+	- Quick weather API test script: `test-weather-api.js`
+	- Prisma seeds for DB: `prisma/seed.js` and `prisma/seed-india.js`
 
 Notes:
-- A `JWT_SECRET` environment variable can be set to change the signing secret. Otherwise a dev secret is used.
-- CORS headers are applied by the `withCors` helper in `src/lib/cors.ts` when wrapping handlers.
+- Set `INDIANAPI_KEY` in `.env.local` to use the real Indian API. See the 'Indian Weather API proxy' section above.
+- For production, set `NODE_ENV=production`, `JWT_SECRET`, and `DATABASE_URL` accordingly.
+- CORS helper: `src/lib/cors.ts` wraps handlers to set appropriate CORS headers.
+
+If you'd like, I can add a small quickstart section with exact env variables and example curl commands to call the main endpoints.
 
 ## Postgres + Prisma (production-ready auth)
 
