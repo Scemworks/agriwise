@@ -1,290 +1,268 @@
 # 🌾 AgriWise - Smart Agriculture Platform
-## Smart India Hackathon 2025
 
 [![SIH 2025](https://img.shields.io/badge/Smart%20India%20Hackathon-2025-green)](https://sih.gov.in)
 [![Next.js](https://img.shields.io/badge/Next.js-15.5.4-black)](https://nextjs.org)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)](https://www.typescriptlang.org)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-4.0-38B2AC)](https://tailwindcss.com)
+[![Prisma](https://img.shields.io/badge/Prisma-Database-blue)](https://prisma.io)
 
-### 🎯 **Problem Statement**
-Farmers in India face numerous challenges including:
-- Lack of access to AI-driven crop recommendations
-- Language barriers preventing technology adoption
-- Limited marketplace access for selling produce
-- No platform for carbon credit generation and trading
-- Weather-related decision making difficulties
+**Empowering Indian farmers with AI-driven insights, multilingual support, and sustainable practices.**
 
-### 💡 **Solution Overview**
-AgriWise is a comprehensive digital platform that empowers farmers with:
-- **AI-Driven Crop Recommendations** based on soil, weather, and location data
-- **Multilingual Support** (English, Hindi, Malayalam) for better accessibility
-- **Smart Marketplace** with bidding system for fair pricing
-- **Carbon Credit Program** for additional income through sustainable practices
-- **Real-time Weather Updates** and farming recommendations
-- **AI Chat Assistant** for instant agricultural advice
+## 📋 Table of Contents
 
-### 🚀 **Key Features**
+- [Overview](#-overview)
+- [Features](#-features)
+- [Tech Stack](#-tech-stack)
+- [Quick Start](#-quick-start)
+- [Configuration](#-configuration)
+- [API Reference](#-api-reference)
+- [Project Structure](#-project-structure)
+- [Team](#-team)
+- [License](#-license)
+- [Contact](#-contact)
 
-#### 1. **Multilingual AI Chat Assistant**
+## 🎯 Overview
+
+AgriWise is a comprehensive digital platform developed for the Smart India Hackathon 2025, designed to address critical challenges faced by Indian farmers. By leveraging AI, multilingual support, and modern web technologies, AgriWise provides farmers with actionable insights for better decision-making, increased productivity, and sustainable farming practices.
+
+### Problem Statement
+Indian farmers encounter significant barriers including:
+- Limited access to AI-powered agricultural recommendations
+- Language barriers hindering technology adoption
+- Inadequate marketplace access for produce sales
+- Absence of platforms for carbon credit generation
+- Challenges in weather-informed decision making
+
+### Solution
+AgriWise delivers a unified platform featuring AI-driven crop recommendations, real-time weather intelligence, a smart marketplace, carbon credit management, and multilingual support in English, Hindi, and Malayalam.
+
+## 🚀 Features
+
+### 🤖 AI-Powered Crop Recommendations
+- Intelligent crop suitability analysis based on soil, weather, and location data
+- Comprehensive scoring algorithms (`src/lib/ai/crop-recommendation.ts`)
+- Yield predictions and market price insights
+- Planting/harvesting timelines and risk assessments
+
+### 🌦️ Weather Intelligence
+- Real-time weather data integration via Indian Weather API
+- 5-day forecasts and historical data analysis
+- Weather-based farming recommendations
+- Alert system for adverse conditions
+
+### 🏪 Smart Marketplace
+- Product listing with image uploads and auction functionality
+- Category-based browsing (grains, fruits, livestock, equipment)
+- Rating and review system for seller credibility
+- Location-based seller discovery
+
+### 🌱 Carbon Credit Program
+- Sustainable practice tracking and credit calculation
+- Marketplace for carbon credit trading
+- Implementation guides for eco-friendly farming
+- Environmental impact monitoring
+
+### 💬 Multilingual AI Chat Assistant
 - Real-time Q&A in English, Hindi, and Malayalam
-- Voice input support for hands-free interaction
-- Quick questions for common farming queries
-- Context-aware responses for different agricultural topics
+- Voice input capabilities for accessibility
+- Context-aware agricultural advice
+- Quick question presets for common queries
 
-#### 2. **AI-Driven Crop Recommendations**
-- Comprehensive soil and weather analysis
-- Suitability scoring for different crops
-- Expected yield and market price predictions
-- Planting and harvesting time recommendations
-- Advantages and disadvantages analysis
+### 📱 Mobile-First Design
+- Responsive interface optimized for smartphones
+- Touch-friendly navigation and visual indicators
+- Accessibility features for diverse user needs
+- Offline-ready architecture (planned enhancement)
 
-#### 3. **Smart Marketplace**
-- Product listing with image upload
-- Auction system for fair pricing
-- Category-based browsing (Grains, Fruits, Vegetables, etc.)
-- Rating and review system
-- Location-based seller information
+## 🛠️ Tech Stack
 
-#### 4. **Carbon Credit Program**
-- Calculate credits from sustainable practices
-- Track and manage carbon credits
-- Sell credits to companies and organizations
-- Implementation guides for sustainable farming
-- Environmental impact tracking
-
-#### 5. **Weather Intelligence**
-- Real-time weather conditions
-- 5-day weather forecast
-- Weather alerts and notifications
-- Farming recommendations based on weather
-- Historical weather data
-
-### 🛠️ **Technical Stack**
-
-#### **Frontend**
+### Frontend
 - **Next.js 15** - React framework with App Router
 - **TypeScript** - Type-safe development
-- **Tailwind CSS** - Utility-first CSS framework
+- **Tailwind CSS** - Utility-first styling
 - **Radix UI** - Accessible component primitives
-- **Lucide React** - Beautiful icon library
+- **Lucide React** - Icon library
 
-#### **State Management**
-- **React Context** - Language and theme management
-- **Local State** - Component-level state management
+### Backend & Database
+- **Next.js API Routes** - Server-side API endpoints
+- **Prisma** - Database ORM with PostgreSQL
+- **JWT** - Authentication tokens
+- **bcrypt** - Password hashing
 
-#### **Internationalization**
-- **Custom Translation System** - Complete multilingual support
-- **Language Switching** - Real-time language change
-- **Persistent Language** - User preference saved
+### Integrations
+- **Indian Weather API** - Weather data proxy (`src/lib/weather.ts`)
+- **Custom AI Engine** - Crop recommendation logic (`src/lib/ai/crop-recommendation.ts`)
 
-### 🌍 **Multilingual Support**
+### Internationalization
+- **Custom Translation System** - Complete i18n support (`src/lib/translations.ts`)
+- **React Context** - Language state management (`src/contexts/LanguageContext.tsx`)
 
-| Feature | English | Hindi | Malayalam |
-|---------|---------|-------|-----------|
-| UI Elements | ✅ | ✅ | ✅ |
-| Forms | ✅ | ✅ | ✅ |
-| Error Messages | ✅ | ✅ | ✅ |
-| Help Text | ✅ | ✅ | ✅ |
-| Chat Assistant | ✅ | ✅ | ✅ |
+## 🚀 Quick Start
 
-### 📱 **Mobile-First Design**
-- Responsive design for all screen sizes
-- Touch-friendly interface
-- Optimized for low-literacy users
-- Visual indicators and clear navigation
-- Offline-ready architecture (future enhancement)
+### Prerequisites
+- Node.js 18+
+- pnpm package manager
+- PostgreSQL database (for production)
 
-### 🎨 **Design System**
-- **Color Palette**: Natural greens, browns, and earth tones
-- **Typography**: Clear, readable fonts optimized for farmers
-- **Icons**: Agricultural context with Lucide React
-- **Components**: Consistent design language
-- **Accessibility**: High contrast and clear visual hierarchy
+### Installation
 
-### 🚀 **Getting Started**
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/your-username/agriwise.git
+   cd agriwise
+   ```
 
-#### **Prerequisites**
+2. **Install dependencies**
+   ```bash
+   pnpm install
+   ```
 
-#### **Installation**
-```bash
-# Clone the repository
-git clone https://github.com/your-username/agriwise.git
+3. **Set up environment variables**
+   ```bash
+   cp env.example .env.local
+   # Edit .env.local with your configuration
+   ```
 
-# Navigate to project directory
-cd agriwise
+4. **Database setup (optional for demo)**
+   ```bash
+   pnpm prisma:generate
+   pnpm prisma:migrate
+   pnpm prisma:seed
+   ```
 
-# Install dependencies
-pnpm install
+5. **Start development server**
+   ```bash
+   pnpm dev
+   ```
 
-# Start development server
-pnpm dev
+6. **Access the application**
+   - Open [http://localhost:3000](http://localhost:3000) in your browser
+   - Register/login to access dashboard features
+
+## ⚙️ Configuration
+
+### Environment Variables
+
+Create a `.env.local` file in the project root:
+
+```env
+# Database
+DATABASE_URL="postgresql://username:password@localhost:5432/agriwise"
+
+# Authentication
+JWT_SECRET="your-secure-jwt-secret-here"
+
+# Weather API
+INDIANAPI_KEY="your-indianapi-key"
+USE_WEATHER_SANDBOX=true  # Set to false for production
+
+# CORS (optional)
+ALLOWED_ORIGINS="https://yourdomain.com,https://anotherdomain.com"
 ```
 
-#### **Access the Application**
-
-## Indian Weather API proxy
-
-This project includes a small server-side proxy to the Indian Weather API (indianapi.in).
-
-How to configure:
-
-- Create a `.env.local` at the project root and add your API key:
-
-```
-INDIANAPI_KEY=your_real_key_here
+### Demo Mode
+For testing without external APIs, enable sandbox mode in `.env.local`:
+```env
+USE_WEATHER_SANDBOX=true
 ```
 
-- Endpoints exposed by the app (server-side):
-	- GET /api/weather/india?city=Chennai  -> proxies to indianapi.in/india/weather
-	- GET /api/weather/india/cities       -> proxies to indianapi.in/india/cities
+## 📡 API Reference
 
-	Sandbox and global endpoints
+### Authentication Endpoints
+- `POST /api/auth/register` - User registration
+- `POST /api/auth/login` - User login
+- `POST /api/auth/refresh` - Refresh access token
+- `POST /api/auth/logout` - User logout
+- `GET /api/auth/verify` - Verify token validity
 
-	If you don't have an API key or want to test without consuming quota, enable sandbox mode by adding to `.env.local`:
+### Weather Endpoints
+- `GET /api/weather/india?city={city}` - Indian city weather
+- `GET /api/weather/india/cities` - List Indian cities
+- `GET /api/weather/india/by-id?city_id={id}` - Weather by city ID
+- `GET /api/weather/global/current?location={location}` - Global current weather
+- `GET /api/weather/global/weather?location={location}&days={days}` - Global weather forecast
 
-	```
-	INDIANAPI_SANDBOX=true
-	```
+### AI & Recommendations
+- `POST /api/ai/crop-recommendation` - Get crop recommendations
+- `GET /api/ai/crops` - List available crops
+- `GET /api/ai/crops/{cropName}` - Crop details
 
-	In sandbox mode the proxy will use the Indian API sandbox base (no key required). To use the real API provide `INDIANAPI_KEY`.
+### Marketplace
+- `GET /api/marketplace/products` - List marketplace products
+- `POST /api/marketplace/products/create` - Create product listing
+- `GET /api/marketplace/products/{id}` - Product details
+- `POST /api/marketplace/listings/{id}/bids` - Place bid on listing
 
-	Global endpoints (proxying aggregated global data):
-	- GET /api/weather/global/current?location=London
-	- GET /api/weather/global/weather?location=London&days=2
-	- GET /api/weather/global/forecast?location=Paris&days=3
+### Dashboard & Protected
+- `GET /api/dashboard` - User dashboard data
+- `GET /api/protected` - Protected route example
+- `GET /api/location/cities` - City data
+- `GET /api/location/states` - State data
 
-The frontend weather page at `src/app/weather/page.tsx` is wired to call `/api/weather/india`.
+## 📁 Project Structure
 
-### 📊 **Demo Data**
-The application includes comprehensive demo data for presentation:
-- Sample user profiles and farm information
-- Mock weather data and forecasts
-- Example crop recommendations
-- Marketplace products with ratings
-- Carbon credit transactions
-- Chat conversation history
+```
+agriwise/
+├── prisma/                    # Database schema and migrations
+│   ├── schema.prisma         # Prisma database schema
+│   ├── seed.js               # Database seeding script
+│   └── migrations/           # Database migration files
+├── public/                   # Static assets
+├── scripts/                  # Utility scripts
+├── src/
+│   ├── app/                  # Next.js App Router pages
+│   │   ├── api/              # API route handlers
+│   │   ├── carbon-credits/   # Carbon credits page
+│   │   ├── chat/             # Chat assistant page
+│   │   ├── dashboard/        # User dashboard
+│   │   ├── login/            # Authentication pages
+│   │   ├── marketplace/      # Marketplace pages
+│   │   ├── recommendations/  # Crop recommendations
+│   │   ├── weather/          # Weather pages
+│   │   └── globals.css       # Global styles
+│   ├── components/           # Reusable UI components
+│   │   ├── ui/               # Base UI primitives
+│   │   ├── Footer.tsx        # Site footer
+│   │   └── Header.tsx        # Site header
+│   ├── contexts/             # React contexts
+│   │   └── LanguageContext.tsx # Language provider
+│   ├── lib/                  # Utility libraries
+│   │   ├── ai/               # AI-related utilities
+│   │   ├── auth.ts           # Authentication helpers
+│   │   ├── cookies.ts        # Cookie utilities
+│   │   ├── cors.ts           # CORS middleware
+│   │   ├── db.ts             # Database client
+│   │   ├── demoData.ts       # Demo data
+│   │   ├── errors.ts         # Error handling
+│   │   ├── logger.ts         # Logging utilities
+│   │   ├── security.ts       # Security helpers
+│   │   ├── translations.ts   # Translation strings
+│   │   ├── utils.ts          # General utilities
+│   │   └── weather.ts        # Weather API client
+│   └── middleware/           # Next.js middleware
+├── test-weather-api.js       # Weather API test script
+├── env.example               # Environment variables template
+├── setup-database.js         # Database setup script
+└── README.md                 # This file
+```
 
-### 🎯 **Target Users**
-- **Primary**: Small to medium-scale farmers in India
-- **Secondary**: Agricultural cooperatives and FPOs
-- **Tertiary**: Agricultural consultants and extension workers
+## 🤝 Team
 
-### 🌟 **Key Differentiators**
-1. **Complete Multilingual Support** - First platform with Hindi and Malayalam
-2. **AI-Powered Recommendations** - Advanced crop suggestion algorithms
-3. **Carbon Credit Integration** - Unique income generation opportunity
-4. **Mobile-First Design** - Optimized for smartphone usage
-5. **Community Features** - Chat assistant and marketplace for farmer interaction
+**Team Name:** CARBONIX GEC
 
-### 📈 **Impact Metrics**
-- **10,000+** Farmers Connected
-- **50+** Crop Varieties Supported
-- **₹2M+** Carbon Credits Generated
-- **95%** User Satisfaction Rate
+- **Frontend Development:** Next.js, TypeScript, Tailwind CSS
+- **Backend Integration:** API architecture, database design
+- **UI/UX Design:** Mobile-first, accessibility-focused design
+- **AI/ML Integration:** Crop recommendation algorithms
+- **Internationalization:** Multilingual support implementation
 
-### 🔮 **Future Roadmap**
-- **Mobile App** - Native iOS and Android applications
-- **Offline Support** - Work without internet connection
-- **SMS Integration** - Updates for farmers without smartphones
-- **IoT Integration** - Sensor data for real-time monitoring
-- **Blockchain** - Transparent carbon credit trading
-- **Advanced Analytics** - Farm performance insights
+## 📄 License
 
-### 🤝 **Team**
-- **Team Name**: CARBONIX GEC
-- **Frontend Development**: Next.js, TypeScript, Tailwind CSS
-- **UI/UX Design**: Mobile-first, accessibility-focused
-- **Backend Integration**: API-ready architecture
-- **Multilingual Support**: Complete translation system
-
-### 📞 **Contact**
-- **Email**: support@agriwise.com
-- **Phone**: +91 98765 43210
-- **Location**: Kerala, India
-- **Website**: [agriwise.com](https://agriwise.com)
-
-### 📄 **License**
-This project is developed for Smart India Hackathon 2025.
+This project was developed for Smart India Hackathon 2025. All rights reserved.
 
 ---
 
 **Built with ❤️ for Indian Farmers | Smart India Hackathon 2025**
 
 *Empowering farmers with technology for a sustainable future*
-
-## Local demo auth API & application workflow
-
-The repository contains both a local/demo and a production-ready setup. Below is a concise workflow and the main files/endpoints to help you navigate the codebase and run the app locally.
-
-1) Start the app (development)
-	- Install deps: `pnpm install`
-	- Run dev server: `pnpm dev`
-
-2) Authentication (demo & production)
-	- Demo auth routes (JWT-based) live under `src/app/api/auth` and call helpers in `src/lib/auth.ts`.
-	- Endpoints (examples):
-	  - POST `/api/auth/register` { email, password, name? } -> { user, token }
-	  - POST `/api/auth/login` { email, password } -> { user, token }
-	  - POST `/api/auth/refresh` -> rotates refresh token cookie
-	- Production: Prisma + Postgres helpers in `src/lib/auth.ts`, DB client in `src/lib/db.ts`. Tokens are stored in HttpOnly cookies using `src/lib/cookies.ts`.
-
-3) Primary API surface
-	- Weather (India + Global) proxies: `src/app/api/weather/*`
-	  - GET `/api/weather/india?city=Chennai`
-	  - GET `/api/weather/india/cities`
-	  - GET `/api/weather/global/current?location=London`
-	- AI: `src/app/api/ai/crop-recommendation/route.ts` (uses `src/lib/ai/crop-recommendation.ts`)
-	- Marketplace: `src/app/api/marketplace/*`
-	- Dashboard / Protected routes: `src/app/api/dashboard/route.ts`, `src/app/api/protected/route.ts`
-
-4) Frontend pages
-	- Main app pages live in the App Router under `src/app/`:
-	  - `/` -> `src/app/page.tsx`
-	  - `/dashboard` -> `src/app/dashboard/page.tsx`
-	  - `/weather` -> `src/app/weather/page.tsx`
-	  - `/recommendations` -> `src/app/recommendations/page.tsx`
-	  - `/marketplace` -> `src/app/marketplace/page.tsx`
-	  - `/chat` -> `src/app/chat/page.tsx`
-	  - `/carbon-credits` -> `src/app/carbon-credits/page.tsx`
-
-5) Internationalization
-	- Translation strings are under `src/lib/translations.ts` (English, Hindi, Malayalam).
-	- Language provider and hook: `src/contexts/LanguageContext.tsx`.
-
-6) Demo data & testing utilities
-	- Demo UI data: `src/lib/demoData.ts`
-	- Quick weather API test script: `test-weather-api.js`
-	- Prisma seeds for DB: `prisma/seed.js` and `prisma/seed-india.js`
-
-Notes:
-- Set `INDIANAPI_KEY` in `.env.local` to use the real Indian API. See the 'Indian Weather API proxy' section above.
-- For production, set `NODE_ENV=production`, `JWT_SECRET`, and `DATABASE_URL` accordingly.
-- CORS helper: `src/lib/cors.ts` wraps handlers to set appropriate CORS headers.
-
-If you'd like, I can add a small quickstart section with exact env variables and example curl commands to call the main endpoints.
-
-## Postgres + Prisma (production-ready auth)
-
-This project includes a Prisma schema for a `User` model and helper utilities for a Postgres-backed auth flow.
-
-Quick start:
-
-1. Create a Postgres database and set `DATABASE_URL` in a `.env` file (see `.env.example`).
-2. Install dependencies and generate Prisma client:
-
-```bash
-pnpm install
-pnpm prisma:generate
-pnpm prisma:migrate
-```
-
-3. Start the dev server:
-
-```bash
-pnpm dev
-```
-
-The API routes `/api/auth/register`, `/api/auth/login`, and `/api/auth/verify` are wired to the Prisma-backed auth helpers. Tokens are stored in a HttpOnly cookie for better security.
-
-Replace the in-memory store with a production-ready DB (already done — Prisma + Postgres). For production, set `NODE_ENV=production`, `JWT_SECRET`, and secure the cookie origins.
 
