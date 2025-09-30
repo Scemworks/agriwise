@@ -1,5 +1,5 @@
-import jwt from 'jsonwebtoken'
-import bcrypt from 'bcryptjs'
+import * as jwt from 'jsonwebtoken'
+import * as bcrypt from 'bcryptjs'
 import prisma from './db'
 
 const JWT_SECRET = process.env.JWT_SECRET
@@ -47,7 +47,7 @@ export async function getUserById(id: string) {
 export { prisma }
 
 // --- Refresh token helpers ---
-import crypto from 'crypto'
+import * as crypto from 'crypto'
 
 const REFRESH_TOKEN_EXPIRES_DAYS = 30
 

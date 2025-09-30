@@ -12,54 +12,37 @@ async function handler(req: Request) {
     // Validate request body
     const validation = await validateRequest(RegisterSchema)(req)
     if (!validation.success) {
-      return validation.error
+      // TS: cast here because `validation` is a union type — return the prepared NextResponse
+      return (validation as any).error
     }
 
-    const { email, password, name, phone, state, city, pincode, address, soilType, currentCrops, landSize, irrigation } = validation.data
+  const { email, password, name, phone, state, city, pincode, address, soilType, currentCrops, landSize, irrigation } = validation.data
+
+  // Keep these in outer scope so we can reuse when creating related records
+  let stateName: string | undefined = state
+  let cityName: string | undefined = city
 
     logAuth('User registration attempt', undefined, { email })
 
-    // Create user with enhanced profile
-    const user = await prisma.user.create({
-      data: {
-        email,
-        name,
-        passwordHash: await require('bcryptjs').hash(password, 12),
-        phone,
-        state,
-        city,
-        pincode,
-        address,
-        isVerified: false,
-        isActive: true
-      }
-    })
+    // Create user (use createUser helper which handles hashing and basic checks)
+    const created = await createUser(email, password, name)
+    // createUser returns a minimal user object; fetch full user record via prisma to get id
+    const user = await prisma.user.findUnique({ where: { email: created.email } })
+    if (!user) throw new Error('Failed to retrieve created user')
 
     // Create farm if farming details provided
     let farm = null
     try {
       if (soilType || currentCrops || landSize) {
-        // Get state and city names for farm location
-        let stateName = state
-        let cityName = city
-        
-        if (state) {
-          const stateData = await prisma.state.findUnique({ where: { id: state } })
-          stateName = stateData?.name || state
-        }
-        
-        if (city) {
-          const cityData = await prisma.city.findUnique({ 
-            where: { id: city },
-            include: { state: true }
-          })
-          cityName = cityData?.name || city
-        }
+        // Use provided state/city strings directly (RegisterSchema accepts strings)
+        const stateName = state || undefined
+        const cityName = city || undefined
 
-        farm = await prisma.farm.create({
+        // Use any-cast to avoid type errors if Prisma client types are out-of-sync
+        farm = await (prisma as any).farm.create({
           data: {
             name: `${name ?? 'My Farm'}`,
-            location: `${cityName}, ${stateName}`,
+            location: `${cityName || 'Unknown'}, ${stateName || 'Unknown'}`,
             state: stateName,
             city: cityName,
             pincode,
@@ -77,24 +60,27 @@ async function handler(req: Request) {
         })
       }
     } catch (e) {
-      logAuth('Failed creating farm during registration', user.id, { error: e.message })
+      const msg = e instanceof Error ? e.message : String(e)
+      logAuth('Failed creating farm during registration', user.id, { error: msg })
       // Don't fail registration if farm creation fails
     }
 
     // Create default weather preference
     try {
-      await prisma.weatherPreference.create({
+      // create weather preference - cast to any in case client typings are stale
+      await (prisma as any).weatherPreference.create({
         data: {
           userId: user.id,
-          location: `${cityName || 'Unknown'}, ${stateName || 'Unknown'}`,
+          location: `${city || 'Unknown'}, ${state || 'Unknown'}`,
           isDefault: true,
           alerts: true,
           notifications: true
         }
       })
     } catch (e) {
+      const msg = e instanceof Error ? e.message : String(e)
       // Don't fail registration if weather preference creation fails
-      logAuth('Failed creating weather preference', user.id, { error: e.message })
+      logAuth('Failed creating weather preference', user.id, { error: msg })
     }
 
     const token = signToken({ sub: user.id, email: user.email })

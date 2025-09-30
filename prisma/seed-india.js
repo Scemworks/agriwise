@@ -61,10 +61,20 @@ const majorCities = {
     { name: 'Tiruchirapalli', pincode: '620001', latitude: 10.7905, longitude: 78.7047 }
   ],
   'Kerala': [
-    { name: 'Thiruvananthapuram', pincode: '695001', latitude: 8.5241, longitude: 76.9366 },
-    { name: 'Kochi', pincode: '682001', latitude: 9.9312, longitude: 76.2673 },
-    { name: 'Kozhikode', pincode: '673001', latitude: 11.2588, longitude: 75.7804 },
-    { name: 'Thrissur', pincode: '680001', latitude: 10.5276, longitude: 76.2144 }
+    { name: 'Thiruvananthapuram', pincode: '695001', latitude: 8.5241, longitude: 76.9366 }, // district: Thiruvananthapuram
+    { name: 'Kollam', pincode: '691001', latitude: 8.8932, longitude: 76.6141 },           // district: Kollam
+    { name: 'Pathanamthitta', pincode: '689645', latitude: 9.2648, longitude: 76.7878 },   // district: Pathanamthitta
+    { name: 'Alappuzha', pincode: '688001', latitude: 9.4981, longitude: 76.3388 },        // district: Alappuzha
+    { name: 'Kottayam', pincode: '686001', latitude: 9.5916, longitude: 76.5222 },         // district: Kottayam
+    { name: 'Idukki', pincode: '685607', latitude: 9.8794, longitude: 77.1494 },           // district: Idukki (Painavu region)
+    { name: 'Ernakulam', pincode: '682001', latitude: 9.9816, longitude: 76.2999 },        // district: Ernakulam
+    { name: 'Thrissur', pincode: '680001', latitude: 10.5276, longitude: 76.2144 },       // district: Thrissur
+    { name: 'Palakkad', pincode: '678001', latitude: 10.7867, longitude: 76.6538 },       // district: Palakkad
+    { name: 'Malappuram', pincode: '676505', latitude: 11.0735, longitude: 76.0743 },     // district: Malappuram
+    { name: 'Kozhikode', pincode: '673001', latitude: 11.2588, longitude: 75.7804 },      // district: Kozhikode
+    { name: 'Wayanad', pincode: '673121', latitude: 11.6141, longitude: 76.0825 },        // district: Wayanad (Kalpetta)
+    { name: 'Kannur', pincode: '670001', latitude: 11.8745, longitude: 75.3704 },         // district: Kannur
+    { name: 'Kasaragod', pincode: '671121', latitude: 12.5000, longitude: 74.9900 }       // district: Kasaragod
   ],
   'Maharashtra': [
     { name: 'Mumbai', pincode: '400001', latitude: 19.0760, longitude: 72.8777 },

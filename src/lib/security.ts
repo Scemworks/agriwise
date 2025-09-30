@@ -75,7 +75,7 @@ export function sanitizeInput(input: string): string {
 export function sanitizeForDatabase(input: string): string {
   return input
     .replace(/['"\\]/g, '') // Remove quotes and backslashes
-    .replace(/[;--]/g, '') // Remove SQL comment markers
+    .replace(/;|--/g, '') // Remove SQL comment markers (fixed regex)
     .trim()
 }
 
@@ -200,7 +200,8 @@ export function validateEmail(email: string): boolean {
 // Clean up rate limit store periodically
 setInterval(() => {
   const now = Date.now()
-  for (const [key, record] of rateLimitStore.entries()) {
+  // Convert entries to array to avoid downlevelIteration issues when targeting older TS emit
+  for (const [key, record] of Array.from(rateLimitStore.entries())) {
     if (now > record.resetTime) {
       rateLimitStore.delete(key)
     }

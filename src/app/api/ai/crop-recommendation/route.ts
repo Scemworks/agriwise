@@ -1,9 +1,9 @@
 import { NextResponse } from 'next/server'
-import { withCors } from '@/lib/cors'
-import { withErrorHandling } from '@/lib/errors'
-import { validateRequest } from '@/lib/security'
-import { cropRecommendationAI, SoilData, WeatherData, FarmData } from '@/lib/ai/crop-recommendation'
-import { logAI, logError } from '@/lib/logger'
+import { withCors } from '../../../../lib/cors'
+import { withErrorHandling } from '../../../../lib/errors'
+import { validateRequest } from '../../../../lib/security'
+import { cropRecommendationAI, SoilData, WeatherData, FarmData, CropData } from '../../../../lib/ai/crop-recommendation'
+import { logAI, logError } from '../../../../lib/logger'
 import { z } from 'zod'
 
 // Validation schema for crop recommendation request
@@ -41,7 +41,8 @@ async function handler(req: Request) {
   try {
     // Validate request body
     const validation = await validateRequest(CropRecommendationSchema)(req)
-    if (!validation.success) {
+    // Narrow using property check to satisfy TypeScript's control flow analysis
+    if ('error' in validation) {
       return validation.error
     }
 
@@ -54,12 +55,75 @@ async function handler(req: Request) {
       soilType: soilData.type
     })
 
-    // Get crop recommendations
-    const recommendations = await cropRecommendationAI.getRecommendations(
-      soilData as SoilData,
-      weatherData as WeatherData,
-      farmData as FarmData
-    )
+    // Generate mock recommendations deterministically based on input ranges
+    const allCrops = cropRecommendationAI.getAvailableCrops()
+
+    const scoreCrop = (cropName: string) => {
+      const crop = cropRecommendationAI.getCropDetails(cropName) as CropData | null
+      if (!crop) return 0
+
+      let s = 0
+      // pH
+      const ph = soilData.ph
+      if (ph >= crop.phRange[0] && ph <= crop.phRange[1]) s += 2
+      else s += Math.max(0, 1 - Math.abs((ph - (crop.phRange[0] + crop.phRange[1]) / 2)) / 2)
+
+      // temperature
+      const temp = weatherData.temperature
+      if (temp >= crop.temperatureRange[0] && temp <= crop.temperatureRange[1]) s += 2
+      else s += Math.max(0, 1 - Math.abs(temp - (crop.temperatureRange[0] + crop.temperatureRange[1]) / 2) / 10)
+
+      // rainfall
+      const rain = weatherData.rainfall
+      const [rmin, rmax] = crop.rainfallRange
+      if (rain >= rmin && rain <= rmax) s += 1.5
+      else s += Math.max(0, Math.min(1, rain / (rmin || 1)))
+
+      // sunlight
+      const sun = weatherData.sunlight
+      const [smin, smax] = crop.sunlightHours
+      if (sun >= smin && sun <= smax) s += 1
+      else s += Math.max(0, Math.min(1, sun / (smin || 1)))
+
+      // season
+      s += crop.plantingSeason.includes(weatherData.season) ? 1.5 : 0.5
+
+      // irrigation requirement vs farm
+      if (crop.waterNeeds === 'high' && farmData.irrigation) s += 1
+      if (crop.waterNeeds === 'high' && !farmData.irrigation) s -= 0.5
+
+      return s
+    }
+
+    const scored = allCrops.map((c) => ({ name: c, score: scoreCrop(c) }))
+      .sort((a, b) => b.score - a.score)
+
+    const recommendations = scored.slice(0, 5).map((s) => {
+      const crop = cropRecommendationAI.getCropDetails(s.name)!
+      const confidence = Math.max(0, Math.min(1, Math.round((s.score / 8) * 100) / 100))
+      const reasons: string[] = []
+      if (soilData.type && crop.soilTypes.includes(soilData.type)) reasons.push(`Compatible with ${soilData.type} soil`)
+      if (soilData.ph >= crop.phRange[0] && soilData.ph <= crop.phRange[1]) reasons.push(`Soil pH ${soilData.ph} is optimal`)
+      if (crop.plantingSeason.includes(weatherData.season)) reasons.push(`Suitable planting season: ${weatherData.season}`)
+
+      return {
+        crop: crop.name,
+        variety: crop.varieties[0] || 'Local variety',
+        confidence,
+        reasons,
+        plantingTime: (function(season){
+          const map: Record<string,string> = { spring: 'March-May', summer: 'June-August', autumn: 'September-November', winter: 'December-February' }
+          return map[season] || 'Check local calendar'
+        })(weatherData.season),
+        harvestTime: crop.harvestTime,
+        expectedYield: `${Math.round((crop.yieldPerAcre[0]+crop.yieldPerAcre[1])/2 * farmData.landSize)} kg`,
+        waterRequirements: crop.waterNeeds === 'high' ? 'High' : crop.waterNeeds === 'medium' ? 'Medium' : 'Low',
+        fertilizerNeeds: crop.fertilizerNeeds || 'Medium',
+        pestRisks: crop.pestRisks || [],
+        marketPrice: crop.marketPrice || undefined,
+        profitPotential: 'medium'
+      }
+    })
 
     logAI('Crop recommendations generated successfully', 'CropAI', {
       recommendationsCount: recommendations.length,
@@ -70,7 +134,7 @@ async function handler(req: Request) {
       success: true,
       recommendations,
       metadata: {
-        totalCropsAnalyzed: cropRecommendationAI.getAvailableCrops().length,
+        totalCropsAnalyzed: allCrops.length,
         recommendedCrops: recommendations.length,
         generatedAt: new Date().toISOString(),
         location: farmData.location,

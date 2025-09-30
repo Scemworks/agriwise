@@ -8,13 +8,14 @@ function originAllowed(origin?: string) {
   return ALLOWED_ORIGINS.includes(origin)
 }
 
-export function withCors(handler: (req: Request) => Promise<Response> | Response) {
-  return async (req: Request) => {
-    const origin = req.headers.get('origin') || undefined
+export function withCors(handler: (...args: any[]) => Promise<Response> | Response) {
+  return async (...args: any[]) => {
+    const req = args[0] as Request
+    const origin = req?.headers?.get('origin') || undefined
     const allowed = originAllowed(origin)
 
     // Handle preflight
-    if (req.method === 'OPTIONS') {
+    if (req?.method === 'OPTIONS') {
       const headers: Record<string, string> = {
         'Access-Control-Allow-Methods': 'GET,HEAD,POST,PUT,DELETE,OPTIONS',
         'Access-Control-Allow-Headers': 'Content-Type, Authorization',
@@ -26,7 +27,7 @@ export function withCors(handler: (req: Request) => Promise<Response> | Response
       return new Response(null, { status: 204, headers })
     }
 
-    const res = await handler(req)
+    const res = await handler(...args)
     if (res instanceof Response) {
       const newHeaders = new Headers(res.headers)
       if (allowed) newHeaders.set('Access-Control-Allow-Origin', origin || '*')
