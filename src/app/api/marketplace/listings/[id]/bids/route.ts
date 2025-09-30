@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
-import prisma from '@/lib/db'
-import { withCors } from '@/lib/cors'
-import { requireAuth } from '@/lib/middleware/auth'
+import prisma from '../../../../../../lib/db'
+import { withCors } from '../../../../../../lib/cors'
+import { requireAuth } from '../../../../../../lib/middleware/auth'
 
 async function handler(req: Request) {
   if (req.method !== 'POST') return NextResponse.json({ error: 'Method not allowed' }, { status: 405 })
@@ -27,7 +27,8 @@ async function handler(req: Request) {
     return NextResponse.json({ error: 'Cannot bid on your own listing' }, { status: 403 })
   }
 
-  const highest = listing.bids.reduce((max, b) => (b.amount > max ? b.amount : max), 0)
+  // Ensure TypeScript infers correct types for reduce accumulator
+  const highest = listing.bids.reduce((max: number, b: { amount: number }) => (b.amount > max ? b.amount : max), 0)
   if (listing.startingBid && amount < listing.startingBid) return NextResponse.json({ error: 'Bid below starting bid' }, { status: 400 })
   if (amount <= highest) return NextResponse.json({ error: 'Bid must be higher than current highest' }, { status: 400 })
 
