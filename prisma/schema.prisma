@@ -8,44 +8,44 @@ datasource db {
 }
 
 model User {
-  id            String         @id @default(uuid())
-  email         String         @unique
-  name          String?
-  passwordHash  String
-  phone         String?
+  id                  String               @id @default(uuid())
+  email               String               @unique
+  name                String?
+  passwordHash        String
+  phone               String?
   // Location details
-  state         String?
-  city          String?
-  pincode       String?
-  address       String?
-  latitude      Float?
-  longitude     Float?
+  state               String?
+  city                String?
+  pincode             String?
+  address             String?
+  latitude            Float?
+  longitude           Float?
   // User preferences
-  language      String         @default("en")
-  timezone      String         @default("Asia/Kolkata")
+  language            String               @default("en")
+  timezone            String               @default("Asia/Kolkata")
   // Profile
-  avatar        String?
-  bio           String?
-  isVerified    Boolean        @default(false)
-  isActive      Boolean        @default(true)
-  lastLoginAt   DateTime?
-  createdAt     DateTime       @default(now())
-  updatedAt     DateTime       @updatedAt
+  avatar              String?
+  bio                 String?
+  isVerified          Boolean              @default(false)
+  isActive            Boolean              @default(true)
+  lastLoginAt         DateTime?
+  createdAt           DateTime             @default(now())
+  updatedAt           DateTime             @updatedAt
   // relation back to RefreshToken
-  refreshTokens RefreshToken[]
+  refreshTokens       RefreshToken[]
   // marketplace relations
-  products      Product[]
-  reviews       Review[]
-  bids          Bid[]
+  products            Product[]
+  reviews             Review[]
+  bids                Bid[]
   // additional relations
-  farms         Farm[]
-  carbonCredits CarbonCredit[]
-  chatMessages  ChatMessage[]
-  activities    Activity[]
+  farms               Farm[]
+  carbonCredits       CarbonCredit[]
+  chatMessages        ChatMessage[]
+  activities          Activity[]
   // AI recommendations
   cropRecommendations CropRecommendation[]
   // Weather preferences
-  weatherPreferences WeatherPreference[]
+  weatherPreferences  WeatherPreference[]
 }
 
 model RefreshToken {
@@ -128,21 +128,6 @@ model Bid {
   createdAt DateTime @default(now())
 }
 
-// Farms and telemetry
-model Farm {
-  id            String          @id @default(uuid())
-  name          String
-  location      String
-  soilType      String?
-  landSize      Float? // acres
-  currentCrops  String? // comma-separated list for simplicity
-  owner         User            @relation(fields: [ownerId], references: [id])
-  ownerId       String
-  weather       WeatherRecord[]
-  carbonCredits CarbonCredit[]
-  createdAt     DateTime        @default(now())
-}
-
 model WeatherRecord {
   id          String   @id @default(uuid())
   farm        Farm     @relation(fields: [farmId], references: [id])
@@ -201,42 +186,42 @@ model Activity {
 
 // AI Crop Recommendations
 model CropRecommendation {
-  id          String   @id @default(uuid())
-  user        User     @relation(fields: [userId], references: [id])
-  userId      String
-  crop        String
-  variety     String?
-  confidence  Float
-  reasons     String[] // Array of reasons
-  plantingTime String?
-  harvestTime String?
-  expectedYield String?
+  id                String   @id @default(uuid())
+  user              User     @relation(fields: [userId], references: [id])
+  userId            String
+  crop              String
+  variety           String?
+  confidence        Float
+  reasons           String[] // Array of reasons
+  plantingTime      String?
+  harvestTime       String?
+  expectedYield     String?
   waterRequirements String?
-  fertilizerNeeds String?
-  pestRisks   String[]
-  marketPrice Float?
-  profitPotential String?
+  fertilizerNeeds   String?
+  pestRisks         String[]
+  marketPrice       Float?
+  profitPotential   String?
   // Input data used for recommendation
-  soilData    Json?    // Store soil analysis data
-  weatherData Json?    // Store weather data
-  farmData    Json?    // Store farm data
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  soilData          Json? // Store soil analysis data
+  weatherData       Json? // Store weather data
+  farmData          Json? // Store farm data
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
 }
 
 // Weather Preferences
 model WeatherPreference {
-  id          String   @id @default(uuid())
-  user        User     @relation(fields: [userId], references: [id])
-  userId      String
-  location    String   // City/State
-  latitude    Float?
-  longitude   Float?
-  isDefault   Boolean  @default(false)
-  alerts      Boolean  @default(true) // Weather alerts enabled
-  notifications Boolean @default(true) // Push notifications
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id            String   @id @default(uuid())
+  user          User     @relation(fields: [userId], references: [id])
+  userId        String
+  location      String // City/State
+  latitude      Float?
+  longitude     Float?
+  isDefault     Boolean  @default(false)
+  alerts        Boolean  @default(true) // Weather alerts enabled
+  notifications Boolean  @default(true) // Push notifications
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 }
 
 // Indian States and Cities
@@ -257,7 +242,7 @@ model City {
   latitude  Float?
   longitude Float?
   createdAt DateTime @default(now())
-  
+
   @@unique([name, stateId])
 }
 
