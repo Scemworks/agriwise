@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import Link from "next/link"
 import { useLanguage } from "@/contexts/LanguageContext"
 import { Button } from "@/components/ui/button"
@@ -16,6 +16,32 @@ export default function Header() {
   const { language, setLanguage, t } = useLanguage()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [userName, setUserName] = useState<string | null>(null)
+
+  useEffect(() => {
+    let mounted = true
+    async function checkAuth() {
+      try {
+        const res = await fetch('/api/auth/verify', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({}) })
+        if (!mounted) return
+        if (res.ok) {
+          const data = await res.json()
+          if (data && data.valid && data.user) {
+            setIsLoggedIn(true)
+            setUserName(data.user.name || data.user.email || null)
+            return
+          }
+        }
+        setIsLoggedIn(false)
+        setUserName(null)
+      } catch (err) {
+        setIsLoggedIn(false)
+        setUserName(null)
+      }
+    }
+    checkAuth()
+    return () => { mounted = false }
+  }, [])
 
   const languages = [
     { code: "en" as const, name: "English", flag: "🇺🇸" },
@@ -79,30 +105,25 @@ export default function Header() {
             </DropdownMenu>
 
             {isLoggedIn ? (
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="sm" className="text-surface-foreground hover:opacity-90">
-                    <User className="w-4 h-4 mr-2" />
-                    <span className="sr-only">{t.profile}</span>
-                    <span className="hidden sm:inline">{t.profile}</span>
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-48 bg-surface border border-gray-200 rounded-md shadow-lg z-50">
-                  <DropdownMenuItem className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
-                    <Link href="/profile" className="flex items-center space-x-2">
-                      <User className="w-4 h-4" />
-                      <span className="text-foreground">{t.profile}</span>
-                    </Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem
-                    onClick={() => setIsLoggedIn(false)}
-                    className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                  >
-                    <LogOut className="w-4 h-4 mr-2" />
-                    <span className="text-foreground">{t.logout}</span>
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
+              <div className="flex items-center space-x-3">
+                <Link href="/dashboard" className="text-surface-foreground hover:underline">{t.dashboard ?? 'Dashboard'}</Link>
+                <Button variant="ghost" size="sm" className="text-surface-foreground hover:opacity-90" onClick={async () => {
+                  try {
+                    const res = await fetch('/api/auth/logout', { method: 'POST' })
+                    if (res.ok) {
+                      setIsLoggedIn(false)
+                      setUserName(null)
+                      // navigate to home
+                      window.location.href = '/'
+                    }
+                  } catch (err) {
+                    // ignore for now
+                  }
+                }}>
+                  <LogOut className="w-4 h-4 mr-2" />
+                  <span className="hidden sm:inline">{t.logout}</span>
+                </Button>
+              </div>
             ) : (
               <div className="flex items-center space-x-2">
                 <Button variant="outline" size="sm" className="border-white text-surface-foreground hover:bg-white/10">
@@ -183,7 +204,17 @@ export default function Header() {
               {/* Mobile auth actions */}
               <div className="px-4 pt-4 flex space-x-2">
                 {isLoggedIn ? (
-                  <button onClick={() => setIsLoggedIn(false)} className="btn-ghost w-full">
+                  <button onClick={async () => {
+                    try {
+                      const res = await fetch('/api/auth/logout', { method: 'POST' })
+                      if (res.ok) {
+                        setIsLoggedIn(false)
+                        setUserName(null)
+                        setIsMenuOpen(false)
+                        window.location.href = '/'
+                      }
+                    } catch (err) {}
+                  }} className="btn-ghost w-full">
                     {t.logout}
                   </button>
                 ) : (
@@ -208,3 +239,4 @@ export default function Header() {
     </header>
   )
 }
+
