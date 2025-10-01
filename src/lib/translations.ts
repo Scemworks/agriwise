@@ -200,7 +200,7 @@ export interface Translations {
   composting: string;
   creditsPerAcre: string;
   implementation: string;
-  benefits: string;
+  carbonBenefits: string;
   availableCredits: string;
   creditMarketPrice: string;
   listForSale: string;
@@ -273,6 +273,75 @@ export interface Translations {
   goHome: string;
   notFoundTitle: string;
   notFoundMessage: string;
+
+  // Mission Page
+  missionTitle: string;
+  missionSubtitle: string;
+  visionTitle: string;
+  visionContent: string;
+  coreValuesTitle: string;
+  goalsTitle: string;
+  whyMattersTitle: string;
+  whyMattersContent1: string;
+  whyMattersContent2: string;
+  whyMattersContent3: string;
+  
+  // Contact Page
+  contactTitle: string;
+  contactSubtitle: string;
+  emailSupport: string;
+  phoneSupport: string;
+  liveChat: string;
+  whatsappContact: string;
+  sendMessage: string;
+  name: string;
+  message: string;
+  officeLocation: string;
+  visitUs: string;
+  getInTouch: string;
+  departments: string;
+  
+  // Careers Page
+  careersTitle: string;
+  careersSubtitle: string;
+  whyWorkWithUs: string;
+  careersBenefits: string;
+  openPositions: string;
+  applyNow: string;
+  applicationProcess: string;
+  
+  // Terms Page
+  termsTitle: string;
+  termsSubtitle: string;
+  lastUpdated: string;
+  importantNotice: string;
+  
+  // Cookies Page
+  cookiesTitle: string;
+  cookiesSubtitle: string;
+  whatAreCookies: string;
+  typesOfCookies: string;
+  manageCookies: string;
+  
+  // Data Protection Page
+  dataProtectionTitle: string;
+  dataProtectionSubtitle: string;
+  yourRights: string;
+  securityMeasures: string;
+  retentionPolicy: string;
+  
+  // Accessibility Page
+  accessibilityTitle: string;
+  accessibilitySubtitle: string;
+  commitment: string;
+  features: string;
+  compliance: string;
+  
+  // FAQ Page
+  faqTitle: string;
+  faqSubtitle: string;
+  stillHaveQuestions: string;
+  contactSupport: string;
 }
 
 export const translations: Record<Language, Translations> = {
@@ -476,7 +545,7 @@ export const translations: Record<Language, Translations> = {
     composting: "Composting",
     creditsPerAcre: "Credits per Acre",
     implementation: "Implementation",
-    benefits: "Benefits",
+    carbonBenefits: "Benefits",
     availableCredits: "Available Credits",
     creditMarketPrice: "Market Price",
     listForSale: "List for Sale",
@@ -563,6 +632,75 @@ export const translations: Record<Language, Translations> = {
     notFoundTitle: "Page not found",
     notFoundMessage:
       "We couldn't find the page you were looking for. Check the URL or return to the homepage.",
+
+    // Mission Page
+    missionTitle: "Our Mission",
+    missionSubtitle: "To empower smallholder farmers across India with AI-driven insights, market access, and sustainable farming practices that increase yields, reduce costs, and improve livelihoods.",
+    visionTitle: "Our Vision",
+    visionContent: "A future where every farmer, regardless of farm size or location, has access to world-class agricultural technology, fair markets, and the knowledge needed to build a prosperous and sustainable farming business.",
+    coreValuesTitle: "Our Core Values",
+    goalsTitle: "Our Goals for 2025-2026",
+    whyMattersTitle: "Why This Matters",
+    whyMattersContent1: "India has over 120 million farmers, with 86% operating on small farms of less than 2 hectares. These farmers face challenges including unpredictable weather, fluctuating market prices, limited access to credit, and a lack of timely agricultural information.",
+    whyMattersContent2: "AgriWise bridges this gap by combining artificial intelligence, real-time data, and community-driven insights into a single, accessible platform. We believe that technology should serve those who need it most, and that every farmer deserves the tools to succeed in an increasingly complex agricultural landscape.",
+    whyMattersContent3: "Together, we're not just building a platform – we're building a more resilient, sustainable, and prosperous future for Indian agriculture.",
+
+    // Contact Page
+    contactTitle: "Contact Us",
+    contactSubtitle: "Get in touch with our team. We're here to help!",
+    emailSupport: "Email Support",
+    phoneSupport: "Phone Support",
+    liveChat: "Live Chat",
+    whatsappContact: "WhatsApp",
+    sendMessage: "Send Message",
+    name: "Name",
+    message: "Message",
+    officeLocation: "Office Location",
+    visitUs: "Visit Us",
+    getInTouch: "Get in Touch",
+    departments: "Departments",
+
+    // Careers Page
+    careersTitle: "Join Our Team",
+    careersSubtitle: "Help us transform Indian agriculture with technology",
+    whyWorkWithUs: "Why Work With Us",
+    careersBenefits: "Benefits",
+    openPositions: "Open Positions",
+    applyNow: "Apply Now",
+    applicationProcess: "Application Process",
+
+    // Terms Page
+    termsTitle: "Terms of Service",
+    termsSubtitle: "Please read these terms carefully before using AgriWise",
+    lastUpdated: "Last Updated",
+    importantNotice: "Important Notice",
+
+    // Cookies Page
+    cookiesTitle: "Cookie Policy",
+    cookiesSubtitle: "How we use cookies on AgriWise",
+    whatAreCookies: "What Are Cookies",
+    typesOfCookies: "Types of Cookies",
+    manageCookies: "Manage Cookies",
+
+    // Data Protection Page
+    dataProtectionTitle: "Data Protection",
+    dataProtectionSubtitle: "Your privacy and data rights",
+    yourRights: "Your Rights",
+    securityMeasures: "Security Measures",
+    retentionPolicy: "Retention Policy",
+
+    // Accessibility Page
+    accessibilityTitle: "Accessibility",
+    accessibilitySubtitle: "Our commitment to accessible farming technology",
+    commitment: "Commitment",
+    features: "Features",
+    compliance: "Compliance",
+
+    // FAQ Page
+    faqTitle: "Frequently Asked Questions",
+    faqSubtitle: "Find answers to common questions about AgriWise",
+    stillHaveQuestions: "Still have questions?",
+    contactSupport: "Contact Support",
   },
   hi: {
     // Header & Navigation
@@ -764,7 +902,7 @@ export const translations: Record<Language, Translations> = {
     composting: "कम्पोस्टिंग",
     creditsPerAcre: "प्रति एकड़ क्रेडिट",
     implementation: "कार्यान्वयन",
-    benefits: "लाभ",
+    carbonBenefits: "लाभ",
     availableCredits: "उपलब्ध क्रेडिट",
     creditMarketPrice: "बाजार मूल्य",
     listForSale: "बिक्री के लिए सूचीबद्ध करें",
@@ -851,6 +989,75 @@ export const translations: Record<Language, Translations> = {
     notFoundTitle: "पृष्ठ नहीं मिला",
     notFoundMessage:
       "हम जिस पृष्ठ की आप तलाश कर रहे थे वह नहीं मिला। URL जांचें या होमपेज पर लौटें।",
+
+    // Mission Page
+    missionTitle: "हमारा मिशन",
+    missionSubtitle: "भारत भर के छोटे किसानों को एआई-संचालित अंतर्दृष्टि, बाजार पहुंच, और टिकाऊ खेती प्रथाओं के साथ सशक्त बनाना जो उपज बढ़ाती है, लागत कम करती है और आजीविका में सुधार करती है।",
+    visionTitle: "हमारी दृष्टि",
+    visionContent: "एक ऐसा भविष्य जहां हर किसान, फार्म के आकार या स्थान की परवाह किए बिना, विश्व स्तरीय कृषि तकनीक, निष्पक्ष बाजारों और एक समृद्ध और टिकाऊ खेती व्यवसाय बनाने के लिए आवश्यक ज्ञान तक पहुंच रखता है।",
+    coreValuesTitle: "हमारे मूल मूल्य",
+    goalsTitle: "2025-2026 के लिए हमारे लक्ष्य",
+    whyMattersTitle: "यह क्यों महत्वपूर्ण है",
+    whyMattersContent1: "भारत में 120 मिलियन से अधिक किसान हैं, जिनमें से 86% 2 हेक्टेयर से कम के छोटे खेतों पर काम करते हैं। इन किसानों को अप्रत्याशित मौसम, बदलते बाजार मूल्य, ऋण तक सीमित पहुंच, और समय पर कृषि जानकारी की कमी जैसी चुनौतियों का सामना करना पड़ता है।",
+    whyMattersContent2: "अग्रीवाइज़ कृत्रिम बुद्धिमत्ता, वास्तविक समय डेटा और समुदाय-संचालित अंतर्दृष्टि को एक एकल, सुलभ मंच में मिलाकर इस अंतर को पाटता है। हम मानते हैं कि प्रौद्योगिकी को उन लोगों की सेवा करनी चाहिए जिन्हें इसकी सबसे अधिक आवश्यकता है, और हर किसान को तेजी से जटिल कृषि परिदृश्य में सफल होने के लिए उपकरणों के लायक है।",
+    whyMattersContent3: "एक साथ, हम केवल एक प्लेटफ़ॉर्म नहीं बना रहे हैं - हम भारतीय कृषि के लिए एक अधिक लचीला, टिकाऊ और समृद्ध भविष्य बना रहे हैं।",
+
+    // Contact Page
+    contactTitle: "संपर्क करें",
+    contactSubtitle: "हमारी टीम से संपर्क करें। हम यहां मदद के लिए हैं!",
+    emailSupport: "ईमेल सहायता",
+    phoneSupport: "फोन सहायता",
+    liveChat: "लाइव चैट",
+    whatsappContact: "व्हाट्सएप",
+    sendMessage: "संदेश भेजें",
+    name: "नाम",
+    message: "संदेश",
+    officeLocation: "कार्यालय स्थान",
+    visitUs: "हमसे मिलें",
+    getInTouch: "संपर्क में रहें",
+    departments: "विभाग",
+
+    // Careers Page
+    careersTitle: "हमारी टीम में शामिल हों",
+    careersSubtitle: "प्रौद्योगिकी के साथ भारतीय कृषि को बदलने में हमारी मदद करें",
+    whyWorkWithUs: "हमारे साथ क्यों काम करें",
+    careersBenefits: "लाभ",
+    openPositions: "खुली स्थितियां",
+    applyNow: "अभी आवेदन करें",
+    applicationProcess: "आवेदन प्रक्रिया",
+
+    // Terms Page
+    termsTitle: "सेवा की शर्तें",
+    termsSubtitle: "अग्रीवाइज़ का उपयोग करने से पहले कृपया इन शर्तों को ध्यान से पढ़ें",
+    lastUpdated: "अंतिम अपडेट",
+    importantNotice: "महत्वपूर्ण सूचना",
+
+    // Cookies Page
+    cookiesTitle: "कुकी नीति",
+    cookiesSubtitle: "हम अग्रीवाइज़ पर कुकीज़ का उपयोग कैसे करते हैं",
+    whatAreCookies: "कुकीज़ क्या हैं",
+    typesOfCookies: "कुकीज़ के प्रकार",
+    manageCookies: "कुकीज़ प्रबंधित करें",
+
+    // Data Protection Page
+    dataProtectionTitle: "डेटा सुरक्षा",
+    dataProtectionSubtitle: "आपकी गोपनीयता और डेटा अधिकार",
+    yourRights: "आपके अधिकार",
+    securityMeasures: "सुरक्षा उपाय",
+    retentionPolicy: "प्रतिधारण नीति",
+
+    // Accessibility Page
+    accessibilityTitle: "प्रवेशयोग्यता",
+    accessibilitySubtitle: "सुलभ कृषि प्रौद्योगिकी के लिए हमारी प्रतिबद्धता",
+    commitment: "प्रतिबद्धता",
+    features: "सुविधाएं",
+    compliance: "अनुपालन",
+
+    // FAQ Page
+    faqTitle: "अक्सर पूछे जाने वाले प्रश्न",
+    faqSubtitle: "अग्रीवाइज़ के बारे में सामान्य प्रश्नों के उत्तर खोजें",
+    stillHaveQuestions: "अभी भी प्रश्न हैं?",
+    contactSupport: "सहायता से संपर्क करें",
   },
   ml: {
     // Header & Navigation
@@ -1052,7 +1259,7 @@ export const translations: Record<Language, Translations> = {
     composting: "കമ്പോസ്റ്റിംഗ്",
     creditsPerAcre: "ഏക്കറിന് ക്രെഡിറ്റുകൾ",
     implementation: "നടപ്പാക്കൽ",
-    benefits: "ഗുണങ്ങൾ",
+    carbonBenefits: "ഗുണങ്ങൾ",
     availableCredits: "ലഭ്യമായ ക്രെഡിറ്റുകൾ",
     creditMarketPrice: "വിപണി വില",
     listForSale: "വിൽപ്പനയ്ക്ക് ലിസ്റ്റ് ചെയ്യുക",
@@ -1137,5 +1344,74 @@ export const translations: Record<Language, Translations> = {
     notFoundTitle: "പേജ് കണ്ടെത്തിയില്ല",
     notFoundMessage:
       "നിങ്ങൾ അന്വേഷിച്ച പേജ് കണ്ടെത്താനായില്ല. URL പരിശോധിക്കുക അല്ലെങ്കിൽ ഹോംപേജിലേക്ക് മടങ്ങുക.",
+
+    // Mission Page
+    missionTitle: "ഞങ്ങളുടെ ദൗത്യം",
+    missionSubtitle: "ഇന്ത്യയിലെ ചുറ്റയിലുള്ള കർഷകരെ AI-ചാലിത അന്തർദൃഷ്ടികൾ, മാർക്കറ്റ് പ്രവേശനം, വിളവ് വർദ്ധിപ്പിക്കുന്ന സുസ്ഥിര കൃഷി രീതികൾ എന്നിവയുമായി ശക്തരാക്കുക, ചെലവ് കുറയ്ക്കുക, സംസ്ഥാനം സുധരിക്കുക.",
+    visionTitle: "ഞങ്ങളുടെ ദൃഷ്ടി",
+    visionContent: "കൃഷിസ്ഥലത്തിന്റെ വലിപ്പം അല്ലെങ്കിൽ സ്ഥലം പരിഗണിക്കാതെ, എല്ലാ കർഷകർക്കും ലോകതരത്തിലുള്ള കൃഷി സംസ്കാരം, നീതിയുള്ള മാർക്കറ്റുകൾ, സമൃദ്ധവും സുസ്ഥിരവുമായ കൃഷിവ്യവസായം നിർമ്മിക്കാനാവശ്യമായ അറിവ് ലഭ്യമാകുന്ന ഒരു ഭവിഷ്യത്ത്.",
+    coreValuesTitle: "ഞങ്ങളുടെ മൂലഭൂത മൂല്യങ്ങൾ",
+    goalsTitle: "2025-2026 ലക്ഷ്യങ്ങൾ",
+    whyMattersTitle: "എന്ത് ഇത് മഹത്വപൂർണ്ണം",
+    whyMattersContent1: "ഇന്ത്യയിൽ 120 ദശലക്ഷത്തിലധികം കർഷകരുണ്ട്, അവരിൽ 86% പേർ 2 ഹെക്ടറിലും താഴെ ചുറ്റയിലുള്ള കൃഷിസ്ഥലങ്ങളിൽ പ്രവർത്തിക്കുന്നു. അപ്രത്യാശിത കാലാവസ്ഥ, മാറുന്ന മാർക്കറ്റ് വില, പരിമിത പണവും പ്രവേശനം, സമയോചിത കൃഷി വിവരങ്ങളുടെ അഭാവം തുടങ്ങിയ വെല്ലുവിളികൾ ഈ കർഷകർ നേരിടുന്നു.",
+    whyMattersContent2: "അഗ്രിവൈസ് കൃത്രിമ ബുദ്ധി, തൽസമയ ഡേറ്റ, സമുദായ-ചാലിത അന്തർദൃഷ്ടികൾ എന്നിവ ഒരു സുലഭവും പ്ലാറ്റ്‌ഫോമായി മാറ്റിയ്‌കൊണ്ട് ഈ അന്തരം പരിഹരിക്കുന്നു. സംസ്കാരം അത് ആവശ്യപ്പെടുന്നവരെ സേവനം ചെയ്യണമെന്നും, സംകീർണ്ണമായ കൃഷി പരിസ്ഥിതിയിൽ വിജയിക്കാനുള്ള ഉപകരണങ്ങൾ എല്ലാ കർഷകർക്കും ലഭ്യമാവണമെന്നും ഞങ്ങൾ വിശ്വസിക്കുന്നു.",
+    whyMattersContent3: "ഒന്നിച്ച്, ഞങ്ങൾ ഒരു പ്ലാറ്റ്‌ഫോം മാത്രമല്ല നിർമ്മിക്കുന്നു – ഇന്ത്യൻ കൃഷിക്കായി കൂടുതൽ പരിഹരിപ്പും, സുസ്ഥിരവും, സമൃദ്ധവുമായ ഒരു ഭവിഷ്യത്ത് നിർമ്മിക്കുകയാണ്.",
+
+    // Contact Page
+    contactTitle: "ഞങ്ങളെ ബന്ധപ്പെടുക",
+    contactSubtitle: "ഞങ്ങളുടെ ടീമുമായി ബന്ധപ്പെടുക. ഞങ്ങൾ സഹായിക്കാനായി ഇവിടെ ഉണ്ട്!",
+    emailSupport: "ഇമെയിൽ സഹായം",
+    phoneSupport: "ഫോൺ സഹായം",
+    liveChat: "ലൈവ് ചാറ്റ്",
+    whatsappContact: "വ്ഹാട്സപ്പ്",
+    sendMessage: "സന്ദേശം അയയ്‌ക്കുക",
+    name: "പേര്",
+    message: "സന്ദേശം",
+    officeLocation: "ഓഫീസ് സ്ഥാനം",
+    visitUs: "ഞങ്ങളെ സന്ദർശിക്കുക",
+    getInTouch: "സംപർക്കം സ്ഥാപിക്കുക",
+    departments: "വിഭാഗങ്ങൾ",
+
+    // Careers Page
+    careersTitle: "ഞങ്ങളുടെ ടീമില് ചേരുക",
+    careersSubtitle: "സംസ്കാരവുമായി ഇന്ത്യൻ കൃഷി മാറ്റാൻ ഞങ്ങളെ സഹായിക്കുക",
+    whyWorkWithUs: "എന്തുകൊണ്ട് ഞങ്ങളുടെ കൂടെ പണിയെടുക്കണം",
+    careersBenefits: "ഗുണങ്ങൾ",
+    openPositions: "ഖാലി സ്ഥാനങ്ങൾ",
+    applyNow: "ഇപ്പോൾ അപ്ലൈ ചെയ്യുക",
+    applicationProcess: "അപ്ലിക്കേഷൻ പ്രക്രിയ",
+
+    // Terms Page
+    termsTitle: "സേവന നിബന്ധനകൾ",
+    termsSubtitle: "അഗ്രിവൈസ് ഉപയോഗിക്കുന്നതിന് മുമ്പ് ഈ നിബന്ധനകൾ ശ്രദ്ധയോടെ വായിക്കുക",
+    lastUpdated: "അവസാനം അപ്‌ഡേറ്റ് ചെയ്തത്",
+    importantNotice: "മഹത്വപൂർണ്ണ അറിയിപ്പ്",
+
+    // Cookies Page
+    cookiesTitle: "കുക്കി നയം",
+    cookiesSubtitle: "അഗ്രിവൈസിൽ ഞങ്ങൾ എങ്ങനെ കുക്കികൾ ഉപയോഗിക്കുന്നു",
+    whatAreCookies: "കുക്കികൾ എന്താണ്",
+    typesOfCookies: "കുക്കി വിഭാഗങ്ങൾ",
+    manageCookies: "കുക്കികൾ മാനേജ് ചെയ്യുക",
+
+    // Data Protection Page
+    dataProtectionTitle: "ഡേറ്റാ സംരക്ഷണം",
+    dataProtectionSubtitle: "നിങ്ങളുടെ സ്വകാര്യതയും ഡേറ്റാ അവകാശങ്ങളും",
+    yourRights: "നിങ്ങളുടെ അവകാശങ്ങൾ",
+    securityMeasures: "സുരക്ഷാ നടപടികൾ",
+    retentionPolicy: "സംരക്ഷണ നയം",
+
+    // Accessibility Page
+    accessibilityTitle: "സാധ്യത",
+    accessibilitySubtitle: "സുലഭമായ കൃഷി സംസ്കാരത്തിനുള്ള ഞങ്ങളുടെ പ്രതിബദ്ധത",
+    commitment: "പ്രതിബദ്ധത",
+    features: "സുവിധങ്ങൾ",
+    compliance: "അനുപാലനം",
+
+    // FAQ Page
+    faqTitle: "പതിവ് ചോദ്യങ്ങൾ",
+    faqSubtitle: "അഗ്രിവൈസിനെ കുറിച്ചുള്ള സാധാരണ ചോദ്യങ്ങൾക്ക് ഉത്തരങ്ങൾ കണ്ടെത്തുക",
+    stillHaveQuestions: "ഇനിയും ചോദ്യങ്ങൾ ഉണ്ടോ?",
+    contactSupport: "സഹായം സംപർക്കം ചെയ്യുക",
   },
 };
