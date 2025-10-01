@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { LanguageProvider } from "@/contexts/LanguageContext";
-import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import Header from "@/components/Header";
+import { LanguageProvider } from "@/contexts/LanguageContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,12 +17,15 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "AgriWise - Smart Agriculture Platform | SIH 2025",
-  description: "AI-driven crop recommendations, multilingual chat assistant, and marketplace for farmers. Built for Smart India Hackathon 2025.",
-  keywords: "agriculture, farming, AI, crop recommendations, multilingual, marketplace, carbon credits, SIH 2025",
+  description:
+    "AI-driven crop recommendations, multilingual chat assistant, and marketplace for farmers. Built for Smart India Hackathon 2025.",
+  keywords:
+    "agriculture, farming, AI, crop recommendations, multilingual, marketplace, carbon credits, SIH 2025",
   authors: [{ name: "AgriWise Team" }],
   openGraph: {
     title: "AgriWise - Smart Agriculture Platform",
-    description: "AI-driven crop recommendations, multilingual chat assistant, and marketplace for farmers",
+    description:
+      "AI-driven crop recommendations, multilingual chat assistant, and marketplace for farmers",
     type: "website",
     locale: "en_US",
   },
@@ -41,9 +44,7 @@ export default function RootLayout({
         <LanguageProvider>
           <div className="min-h-screen flex flex-col">
             <Header />
-            <main className="flex-1 bg-gray-50">
-              {children}
-            </main>
+            <main className="flex-1 bg-gray-50">{children}</main>
             <Footer />
           </div>
         </LanguageProvider>

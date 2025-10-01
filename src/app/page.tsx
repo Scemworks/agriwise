@@ -1,65 +1,70 @@
-'use client'
+"use client";
 
-import React from 'react'
-import Link from 'next/link'
-import { useLanguage } from '@/contexts/LanguageContext'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { 
-  Sprout, 
-  MessageCircle, 
-  ShoppingCart, 
-  Cloud, 
-  Leaf, 
+import {
+  Cloud,
+  Globe,
+  Leaf,
+  MessageCircle,
+  Shield,
+  ShoppingCart,
+  Smartphone,
+  Sprout,
   TrendingUp,
   Users,
-  Shield,
-  Smartphone,
-  Globe
-} from 'lucide-react'
+} from "lucide-react";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function Home() {
-  const { t } = useLanguage()
+  const { t } = useLanguage();
 
   const features = [
     {
       icon: <Sprout className="w-8 h-8 text-green-600" />,
       title: t.cropRecommendations,
       description: t.featureDescCropRecommendations,
-      link: "/recommendations"
+      link: "/recommendations",
     },
     {
       icon: <MessageCircle className="w-8 h-8 text-blue-600" />,
       title: t.chatAssistant,
       description: t.featureDescChatAssistant,
-      link: "/chat"
+      link: "/chat",
     },
     {
       icon: <ShoppingCart className="w-8 h-8 text-purple-600" />,
       title: t.marketplace,
       description: t.featureDescMarketplace,
-      link: "/marketplace"
+      link: "/marketplace",
     },
     {
       icon: <Cloud className="w-8 h-8 text-cyan-600" />,
       title: t.weatherUpdates,
       description: t.featureDescWeather,
-      link: "/weather"
+      link: "/weather",
     },
     {
       icon: <Leaf className="w-8 h-8 text-emerald-600" />,
       title: t.carbonCredits,
       description: t.featureDescCarbonCredits,
-      link: "/carbon-credits"
-    }
-  ]
+      link: "/carbon-credits",
+    },
+  ];
 
   const stats = [
     { number: "10K+", label: t.farmersConnected },
     { number: "50+", label: t.cropVarieties },
     { number: "₹2M+", label: t.creditsGenerated },
-    { number: "95%", label: t.successRate }
-  ]
+    { number: "95%", label: t.successRate },
+  ];
 
   return (
     <div className="min-h-screen">
@@ -74,10 +79,17 @@ export default function Home() {
               {t.heroSubtitle}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-green-600 hover:bg-green-700 text-white">
+              <Button
+                size="lg"
+                className="bg-green-600 hover:bg-green-700 text-white"
+              >
                 <Link href="/register">{t.getStarted}</Link>
               </Button>
-              <Button size="lg" variant="outline" className="border-green-600 text-green-600 hover:bg-green-50">
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-green-600 text-green-600 hover:bg-green-50"
+              >
                 <Link href="/login">{t.signIn}</Link>
               </Button>
             </div>
@@ -112,14 +124,19 @@ export default function Home() {
               {t.featuresIntro}
             </p>
           </div>
-          
+
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, index) => (
-              <Card key={index} className="hover:shadow-lg transition-shadow duration-300">
+              <Card
+                key={index}
+                className="hover:shadow-lg transition-shadow duration-300"
+              >
                 <CardHeader>
                   <div className="flex items-center space-x-4">
                     {feature.icon}
-                    <CardTitle className="text-xl text-gray-900">{feature.title}</CardTitle>
+                    <CardTitle className="text-xl text-gray-900">
+                      {feature.title}
+                    </CardTitle>
                   </div>
                 </CardHeader>
                 <CardContent>
@@ -153,12 +170,10 @@ export default function Home() {
                     <h3 className="text-xl font-semibold text-gray-900 mb-2">
                       {t.increasedYield}
                     </h3>
-                    <p className="text-muted">
-                      {t.benefitsYieldDesc}
-                    </p>
+                    <p className="text-muted">{t.benefitsYieldDesc}</p>
                   </div>
                 </div>
-                
+
                 <div className="flex items-start space-x-4">
                   <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
                     <Users className="w-4 h-4 text-blue-600" />
@@ -167,12 +182,10 @@ export default function Home() {
                     <h3 className="text-xl font-semibold text-gray-900 mb-2">
                       {t.communitySupport}
                     </h3>
-                    <p className="text-muted">
-                      {t.benefitsCommunityDesc}
-                    </p>
+                    <p className="text-muted">{t.benefitsCommunityDesc}</p>
                   </div>
                 </div>
-                
+
                 <div className="flex items-start space-x-4">
                   <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0">
                     <Shield className="w-4 h-4 text-purple-600" />
@@ -188,7 +201,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            
+
             <div className="bg-gradient-to-br from-green-100 to-emerald-100 rounded-2xl p-8">
               <div className="text-center">
                 <Smartphone className="w-16 h-16 text-green-600 mx-auto mb-4" />
@@ -196,8 +209,8 @@ export default function Home() {
                   {t.mobileFirstDesign}
                 </h3>
                 <p className="text-muted mb-6">
-                  Access all features on your mobile device with our 
-                  responsive design optimized for farmers.
+                  Access all features on your mobile device with our responsive
+                  design optimized for farmers.
                 </p>
                 <div className="flex items-center justify-center space-x-2 text-sm text-gray-500">
                   <Globe className="w-4 h-4" />
@@ -219,15 +232,22 @@ export default function Home() {
             {t.joinThousands}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-white text-green-600 hover:bg-green-50">
+            <Button
+              size="lg"
+              className="bg-white text-green-600 hover:bg-green-50"
+            >
               <Link href="/register">{t.startFreeTrial}</Link>
             </Button>
-            <Button size="lg" variant="outline" className="border-white text-white hover:bg-green-700">
+            <Button
+              size="lg"
+              variant="outline"
+              className="border-white text-white hover:bg-green-700"
+            >
               <Link href="/marketplace">{t.browseMarketplace}</Link>
             </Button>
           </div>
         </div>
       </section>
     </div>
-  )
+  );
 }

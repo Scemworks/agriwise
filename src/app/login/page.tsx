@@ -1,53 +1,60 @@
-'use client'
+"use client";
 
-import React, { useState } from 'react'
-import Link from 'next/link'
-import { useLanguage } from '@/contexts/LanguageContext'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Sprout, Eye, EyeOff } from 'lucide-react'
+import { Eye, EyeOff, Sprout } from "lucide-react";
+import Link from "next/link";
+import type React from "react";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function LoginPage() {
-  const { t } = useLanguage()
-  const [showPassword, setShowPassword] = useState(false)
+  const { t } = useLanguage();
+  const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
-    email: '',
-    password: ''
-  })
+    email: "",
+    password: "",
+  });
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-      // Call the login API (cookies handled by server)
-      ; (async () => {
-        try {
-          const res = await fetch('/api/auth/login', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            credentials: 'include',
-            body: JSON.stringify(formData),
-          })
-          const data = await res.json()
-          if (!res.ok) {
-            alert(data.error || 'Login failed')
-            return
-          }
-          // On success, server sets HttpOnly cookies. Redirect to dashboard.
-          window.location.href = '/dashboard'
-        } catch (err) {
-          console.error(err)
-          alert('Network error')
+    e.preventDefault();
+    // Call the login API (cookies handled by server)
+    (async () => {
+      try {
+        const res = await fetch("/api/auth/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+          body: JSON.stringify(formData),
+        });
+        const data = await res.json();
+        if (!res.ok) {
+          alert(data.error || "Login failed");
+          return;
         }
-      })()
-  }
+        // On success, server sets HttpOnly cookies. Redirect to dashboard.
+        window.location.href = "/dashboard";
+      } catch (err) {
+        console.error(err);
+        alert("Network error");
+      }
+    })();
+  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
-    })
-  }
+      [e.target.name]: e.target.value,
+    });
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-100 flex items-center justify-center p-4">
@@ -64,7 +71,9 @@ export default function LoginPage() {
 
         <Card>
           <CardHeader>
-            <CardTitle className="text-2xl text-center text-gray-900">{t.login}</CardTitle>
+            <CardTitle className="text-2xl text-center text-gray-900">
+              {t.login}
+            </CardTitle>
             <CardDescription className="text-center text-muted">
               Enter your credentials to access your dashboard
             </CardDescription>
@@ -72,12 +81,14 @@ export default function LoginPage() {
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="email" className="text-gray-600">{t.email}</Label>
+                <Label htmlFor="email" className="text-gray-600">
+                  {t.email}
+                </Label>
                 <Input
                   id="email"
                   name="email"
                   type="email"
-                  className='border-green-500 text-gray-600'
+                  className="border-green-500 text-gray-600"
                   placeholder="Enter your email"
                   value={formData.email}
                   onChange={handleInputChange}
@@ -86,13 +97,15 @@ export default function LoginPage() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="password" className="text-gray-600">{t.password}</Label>
+                <Label htmlFor="password" className="text-gray-600">
+                  {t.password}
+                </Label>
                 <div className="relative">
                   <Input
                     id="password"
                     name="password"
-                    type={showPassword ? 'text' : 'password'}
-                    className='border-green-500 text-gray-600'
+                    type={showPassword ? "text" : "password"}
+                    className="border-green-500 text-gray-600"
                     placeholder="Enter your password"
                     value={formData.password}
                     onChange={handleInputChange}
@@ -133,14 +146,17 @@ export default function LoginPage() {
                 </Link>
               </div>
 
-              <Button type="submit" className="w-full bg-green-600 hover:bg-green-700">
+              <Button
+                type="submit"
+                className="w-full bg-green-600 hover:bg-green-700"
+              >
                 {t.login}
               </Button>
             </form>
 
             <div className="mt-6 text-center">
               <p className="text-sm text-muted">
-                Don't have an account?{' '}
+                Don't have an account?{" "}
                 <Link
                   href="/register"
                   className="text-green-600 hover:text-green-700 font-medium"
@@ -154,17 +170,20 @@ export default function LoginPage() {
 
         <div className="mt-8 text-center">
           <p className="text-sm text-gray-500">
-            By signing in, you agree to our{' '}
+            By signing in, you agree to our{" "}
             <Link href="/terms" className="text-green-600 hover:text-green-700">
               Terms of Service
-            </Link>{' '}
-            and{' '}
-            <Link href="/privacy" className="text-green-600 hover:text-green-700">
+            </Link>{" "}
+            and{" "}
+            <Link
+              href="/privacy"
+              className="text-green-600 hover:text-green-700"
+            >
               Privacy Policy
             </Link>
           </p>
         </div>
       </div>
     </div>
-  )
+  );
 }

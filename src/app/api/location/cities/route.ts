@@ -1,30 +1,30 @@
-import { NextResponse } from 'next/server'
-import { withCors } from '@/lib/cors'
-import { withErrorHandling } from '@/lib/errors'
-import { logAPI } from '@/lib/logger'
-import prisma from '@/lib/db'
+import { NextResponse } from "next/server";
+import { withCors } from "@/lib/cors";
+import prisma from "@/lib/db";
+import { withErrorHandling } from "@/lib/errors";
+import { logAPI } from "@/lib/logger";
 
 async function handler(req: Request) {
-  if (req.method !== 'GET') {
-    return NextResponse.json({ error: 'Method not allowed' }, { status: 405 })
+  if (req.method !== "GET") {
+    return NextResponse.json({ error: "Method not allowed" }, { status: 405 });
   }
 
   try {
-    const url = new URL(req.url)
-    const stateId = url.searchParams.get('stateId')
-    const search = url.searchParams.get('search')
+    const url = new URL(req.url);
+    const stateId = url.searchParams.get("stateId");
+    const search = url.searchParams.get("search");
 
-    let whereClause: any = {}
+    const whereClause: any = {};
 
     if (stateId) {
-      whereClause.stateId = stateId
+      whereClause.stateId = stateId;
     }
 
     if (search) {
       whereClause.name = {
         contains: search,
-        mode: 'insensitive'
-      }
+        mode: "insensitive",
+      };
     }
 
     const cities = await prisma.city.findMany({
@@ -38,35 +38,33 @@ async function handler(req: Request) {
         state: {
           select: {
             name: true,
-            code: true
-          }
-        }
+            code: true,
+          },
+        },
       },
       orderBy: {
-        name: 'asc'
+        name: "asc",
       },
-      take: 100 // Limit results
-    })
+      take: 100, // Limit results
+    });
 
-    logAPI('Retrieved cities list', '/api/location/cities', {
+    logAPI("Retrieved cities list", "/api/location/cities", {
       count: cities.length,
       stateId,
-      search
-    })
+      search,
+    });
 
     return NextResponse.json({
       success: true,
       cities,
-      count: cities.length
-    })
-
-  } catch (error) {
+      count: cities.length,
+    });
+  } catch (_error) {
     return NextResponse.json(
-      { error: 'Failed to retrieve cities' },
-      { status: 500 }
-    )
+      { error: "Failed to retrieve cities" },
+      { status: 500 },
+    );
   }
 }
 
-export const GET = withCors(withErrorHandling(handler))
-
+export const GET = withCors(withErrorHandling(handler));

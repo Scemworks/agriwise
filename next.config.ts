@@ -3,38 +3,48 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   // Security headers
   async headers() {
-    return [
+    const securityHeaders = [
       {
-        source: '/(.*)',
-        headers: [
-          {
-            key: 'X-Frame-Options',
-            value: 'DENY',
-          },
-          {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff',
-          },
-          {
-            key: 'X-XSS-Protection',
-            value: '1; mode=block',
-          },
-          {
-            key: 'Referrer-Policy',
-            value: 'strict-origin-when-cross-origin',
-          },
-          {
-            key: 'Permissions-Policy',
-            value: 'camera=(), microphone=(), geolocation=()',
-          },
-        ],
+        key: "X-Frame-Options",
+        value: "DENY",
       },
       {
-        source: '/api/(.*)',
+        key: "X-Content-Type-Options",
+        value: "nosniff",
+      },
+      {
+        key: "X-XSS-Protection",
+        value: "1; mode=block",
+      },
+      {
+        key: "Referrer-Policy",
+        value: "strict-origin-when-cross-origin",
+      },
+      {
+        key: "Permissions-Policy",
+        value: "camera=(), microphone=(), geolocation=()",
+      },
+    ];
+
+    // Add HSTS in production
+    if (process.env.NODE_ENV === "production") {
+      securityHeaders.push({
+        key: "Strict-Transport-Security",
+        value: "max-age=31536000; includeSubDomains; preload",
+      });
+    }
+
+    return [
+      {
+        source: "/(.*)",
+        headers: securityHeaders,
+      },
+      {
+        source: "/api/(.*)",
         headers: [
           {
-            key: 'Cache-Control',
-            value: 'no-store, max-age=0',
+            key: "Cache-Control",
+            value: "no-store, max-age=0",
           },
         ],
       },
@@ -43,8 +53,8 @@ const nextConfig: NextConfig = {
 
   // Image optimization
   images: {
-    domains: ['localhost', 'yourdomain.com'],
-    formats: ['image/webp', 'image/avif'],
+    domains: ["localhost", "yourdomain.com"],
+    formats: ["image/webp", "image/avif"],
   },
 
   // Environment variables
@@ -54,7 +64,7 @@ const nextConfig: NextConfig = {
 
   // Experimental features
   experimental: {
-    serverComponentsExternalPackages: ['@prisma/client'],
+    serverComponentsExternalPackages: ["@prisma/client"],
   },
 
   // Webpack configuration
@@ -71,7 +81,7 @@ const nextConfig: NextConfig = {
   },
 
   // Output configuration
-  output: 'standalone',
+  output: "standalone",
 
   // Compression
   compress: true,
